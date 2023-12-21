@@ -46,7 +46,9 @@ enum HaveNew { DontHaveNew = false, DoHaveNew = true };
 
 struct SideTable {
     spinlock_t slock;
+    //: 用来存储 objc对象 引用计数的 hash 表(未开启 isa 优化或 isa 优化情况下 isa_t 的引用计数溢出时才会用到)。
     RefcountMap refcnts;
+    //: 用来存储 objc对象 的弱引用表。
     weak_table_t weak_table;
 
     SideTable() {

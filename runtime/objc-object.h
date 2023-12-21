@@ -586,6 +586,13 @@ objc_object::rootDealloc()
 #if !ISA_HAS_INLINE_RC
     object_dispose((id)this);
 #else
+    /*:
+     对象的 isa 是经过优化了的，不是一个纯指针；
+     对象没有弱引用；
+     对象没有关联对象；
+     对象没有自定义 C++ 析构方法；
+     没有使用 SideTable 保存引用计数。
+     */
     if (fastpath(isa().nonpointer                     &&
                  !isa().weakly_referenced             &&
                  !isa().has_assoc                     &&

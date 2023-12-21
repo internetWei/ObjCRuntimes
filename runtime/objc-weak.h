@@ -53,6 +53,11 @@ reclamation.
 // The address of a __weak variable.
 // These pointers are stored disguised so memory analysis tools
 // don't see lots of interior pointers from the weak table into objects.
+/*:
+ 你可以将其理解为 id 类型。
+ 它用于隐藏指针的真实类型，从而保护对象的私密性并提供更高的灵活性。
+ 有些文章说这样做是为了防止内存检测工具(例如 leaks)误以为是内存泄漏。
+ */
 typedef DisguisedPtr<objc_object *> weak_referrer_t;
 
 #if __LP64__
@@ -78,17 +83,33 @@ typedef DisguisedPtr<objc_object *> weak_referrer_t;
 #define REFERRERS_OUT_OF_LINE 2
 
 struct weak_entry_t {
+    //: 弱引用指向的 objc对象。
     DisguisedPtr<objc_object> referent;
+    
+    /*:
+     实际存储弱引用的结构。
+     弱引用数量小于 WEAK_INLINE_COUNT 时，用静态数组 inline_referrers
+     存储；反之用动态数组 referrers 存储。
+     */
     union {
         struct {
+            //: 一个动态数组，用于存储所有的弱引用地址。
             weak_referrer_t *referrers;
+            //: 是否使用动态数组的标记位。
             uintptr_t        out_of_line_ness : 2;
+            //: 数组 referrers 的元素数量。
             uintptr_t        num_refs : PTR_MINUS_2;
+            //: 数组 referrers 的长度减一，用来参与 hash 计算。
             uintptr_t        mask;
+            //: hash 冲突的最大次数，在插入元素的时候会记下最大的偏移位置；在查找元素的时候，如果超过了这个值，就说明数组 referrers 中没有该元素。
             uintptr_t        max_hash_displacement;
         };
         struct {
             // out_of_line_ness field is low bits of inline_referrers[1]
+            /*:
+             一个静态数组，用于存储弱引用。
+             补充：objc 对象的最低位只会是 0x8 或 0x0（具体出处忘记了，好像是在一篇文章中看到的），也就是说 inline_referrers[1] 的最低两位绝对是 0，所以它不会和 out_of_line_ness 的数据产生冲突。
+             */
             weak_referrer_t  inline_referrers[WEAK_INLINE_COUNT];
         };
     };
@@ -117,9 +138,13 @@ struct weak_entry_t {
  * and weak_entry_t structs as their values.
  */
 struct weak_table_t {
+    //: 一个 hash 数组，用来存储具体 objc 对象的弱引用表。
     weak_entry_t *weak_entries;
+    //: 数组 weak_entries 的元素数量。
     size_t    num_entries;
+    //: 数组 weak_entries 的长度减一，用来参与 hash 计算(长度不等于元素数量，例如数组长度是 16，但可能只存储了 9 个元素)。
     uintptr_t mask;
+    //: hash 冲突的最大次数，在添加元素的时候会记下最大的偏移位置；在查找元素的时候，如果超过了这个值，就说明数组 weak_entries 中没有该元素。
     uintptr_t max_hash_displacement;
 };
 

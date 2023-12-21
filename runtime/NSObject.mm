@@ -296,7 +296,12 @@ enum CrashIfDeallocating {
 };
 template <HaveOld haveOld, HaveNew haveNew,
           enum CrashIfDeallocating crashIfDeallocating>
-static id 
+/*:
+ location: weak 指针的地址，即 `__weak typeof(self) weakSelf = self;` 中 weakSelf 的地址。
+ newObj: 将要被弱引用的 objc 对象，即 `__weak typeof(self) weakSelf = self;` 中的 self。
+ */
+
+static id
 storeWeak(id *location, objc_object *newObj)
 {
     ASSERT(haveOld  ||  haveNew);
@@ -304,6 +309,8 @@ storeWeak(id *location, objc_object *newObj)
 
     Class previouslyInitializedClass = nil;
     id oldObj;
+    
+    //: SideTable 是 Runtime 中最重要的结构之一，它的内部包含了弱引用表和引用计数表。
     SideTable *oldTable;
     SideTable *newTable;
 
@@ -313,6 +320,7 @@ storeWeak(id *location, objc_object *newObj)
  retry:
     if (haveOld) {
         oldObj = *location;
+        //: 通过全局函数 SideTables() 获取指定 objc对象(oldObj) 对应的 SideTable。
         oldTable = &SideTables()[oldObj];
     } else {
         oldTable = nil;
@@ -325,6 +333,7 @@ storeWeak(id *location, objc_object *newObj)
 
     SideTable::lockTwo<haveOld, haveNew>(oldTable, newTable);
 
+    //: *location(weakSelf) 有可能在其它线程被修改指向了其它 objc对象，如果是的话，跳转到 retry 重新获取相关数据。
     if (haveOld  &&  *location != oldObj) {
         SideTable::unlockTwo<haveOld, haveNew>(oldTable, newTable);
         goto retry;
@@ -335,7 +344,20 @@ storeWeak(id *location, objc_object *newObj)
     // weakly-referenced object has an un-+initialized isa.
     if (haveNew  &&  newObj) {
         Class cls = newObj->getIsa();
-        if (cls != previouslyInitializedClass  &&  
+        /*:
+         确保被弱引用的 objc对象(newObj) 已完全初始化。
+         一般不会发生这种情况，除非你在 +initialized 中对该类型或该类型的子类型对象进行弱引用，例如以下代码就会触发：
+         
+         @implementation Man
+
+         + (void)initialize {
+             Man *man = [[Man alloc] init];
+             __weak typeof(man) weakMan = man;
+         }
+
+         @end
+         */
+        if (cls != previouslyInitializedClass  &&
             !((objc_class *)cls)->isInitialized()) 
         {
             SideTable::unlockTwo<haveOld, haveNew>(oldTable, newTable);
@@ -355,17 +377,20 @@ storeWeak(id *location, objc_object *newObj)
 
     // Clean up old value, if any.
     if (haveOld) {
+        //: 将 weak 指针的地址(location)从指定对象(oldObj)的弱引用表中移除。
         weak_unregister_no_lock(&oldTable->weak_table, oldObj, location);
     }
 
     // Assign new value, if any.
     if (haveNew) {
+        //: 将 weak 指针的地址(location)添加到指定对象(newObj)的弱引用表中。
         newObj = (objc_object *)
             weak_register_no_lock(&newTable->weak_table, (id)newObj, location, 
                                   crashIfDeallocating ? CrashIfDeallocating : ReturnNilIfDeallocating);
         // weak_register_no_lock returns nil if weak store should be rejected
 
         // Set is-weakly-referenced bit in refcount table.
+        //: 修改指定对象(newObj)的 isa 中关于“是否存在弱引用”的标记。
         if (!_objc_isTaggedPointerOrNil(newObj)) {
             newObj->setWeaklyReferenced_nolock();
         }
@@ -383,6 +408,10 @@ storeWeak(id *location, objc_object *newObj)
     // arbitrary code. In particular, even if _setWeaklyReferenced
     // is not implemented, resolveInstanceMethod: may be, and may
     // call back into the weak reference machinery.
+    /*:
+     我没找到关于它的详细信息，从注释得知它也是用来修改指定对象(newObj)的弱引用标记。
+     不过，可以确定的是，它不是用来修改关于 isa 中“是否存在弱引用”的标记。
+     */
     callSetWeaklyReferenced((id)newObj);
 
     return (id)newObj;
@@ -452,6 +481,12 @@ objc_initWeak(id *location, id newObj)
         (location, (objc_object*)newObj);
 }
 
+/*:
+ 和 objc_initWeak 类似。
+ 区别在于当 newObj 正在释放时，objc_initWeak 会崩溃，而 objc_initWeakOrNil 会返回 nil 不会崩溃。
+ 如果 newObj 没有正在释放的话，这两个函数没有任何区别。
+ 我们在项目中初始化 weak 指针时，一般都会调用 objc_initWeak，objc_initWeakOrNil 猜测是系统内部使用。
+ */
 id
 objc_initWeakOrNil(id *location, id newObj)
 {
@@ -1503,6 +1538,7 @@ objc_object::clearDeallocating_slow()
     SideTable& table = SideTables()[this];
     table.lock();
     if (isa().weakly_referenced) {
+        //: 处理指向该对象的弱引用，将其置为 nil。
         weak_clear_no_lock(&table.weak_table, (id)this);
     }
 #if ISA_HAS_INLINE_RC
