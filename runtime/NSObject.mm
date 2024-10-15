@@ -43,7 +43,7 @@
 #include <sys/mman.h>
 #include <execinfo.h>
 
-#include <os/feature_private.h>
+//#include <os/feature_private.h>
 
 extern "C" {
 #include <os/reason_private.h>
@@ -1195,12 +1195,12 @@ public:
     static void badPop(void *token)
     {
         static bool complained = false;
-#if TARGET_OS_EXCLAVEKIT
+//#if TARGET_OS_EXCLAVEKIT
         bool willTerminate = true;
-#else
-        bool willTerminate = (DebugPoolAllocation == Fatal
-                              || sdkIsAtLeast(10_12, 10_0, 10_0, 3_0, 2_0));
-#endif
+//#else
+//        bool willTerminate = (DebugPoolAllocation == Fatal
+//                              || sdkIsAtLeast(10_12, 10_0, 10_0, 3_0, 2_0));
+//#endif
 
         if (!complained) {
             complained = true;

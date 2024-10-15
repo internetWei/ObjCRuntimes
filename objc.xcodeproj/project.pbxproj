@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 54;
+	objectVersion = 70;
 	objects = {
 
 /* Begin PBXAggregateTarget section */
@@ -48,6 +48,8 @@
 		39ABD72312F0B61800D1054C /* objc-weak.h in Headers */ = {isa = PBXBuildFile; fileRef = 39ABD71F12F0B61800D1054C /* objc-weak.h */; };
 		39ABD72412F0B61800D1054C /* objc-weak.mm in Sources */ = {isa = PBXBuildFile; fileRef = 39ABD72012F0B61800D1054C /* objc-weak.mm */; };
 		4D88C664298C76E1009A8928 /* objc-malloc-instance.h in Headers */ = {isa = PBXBuildFile; fileRef = 4D88C663298C76E1009A8928 /* objc-malloc-instance.h */; };
+		6A01E8AB2CBE6C4F00079E89 /* libobjc.A.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = D2AAC0630554660B00DB518D /* libobjc.A.dylib */; };
+		6A01E8AC2CBE6C4F00079E89 /* libobjc.A.dylib in Embed Libraries */ = {isa = PBXBuildFile; fileRef = D2AAC0630554660B00DB518D /* libobjc.A.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		6E1475EA21DFDB1B001357EA /* llvm-AlignOf.h in Headers */ = {isa = PBXBuildFile; fileRef = 6E1475E521DFDB1A001357EA /* llvm-AlignOf.h */; };
 		6E1475EB21DFDB1B001357EA /* llvm-DenseMap.h in Headers */ = {isa = PBXBuildFile; fileRef = 6E1475E621DFDB1B001357EA /* llvm-DenseMap.h */; };
 		6E1475EC21DFDB1B001357EA /* llvm-DenseMapInfo.h in Headers */ = {isa = PBXBuildFile; fileRef = 6E1475E721DFDB1B001357EA /* llvm-DenseMapInfo.h */; };
@@ -157,6 +159,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		6A01E8AD2CBE6C4F00079E89 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 08FB7793FE84155DC02AAC07 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = D2AAC0620554660B00DB518D;
+			remoteInfo = objc;
+		};
 		6EF877F323263D8000963DBB /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 08FB7793FE84155DC02AAC07 /* Project object */;
@@ -188,6 +197,26 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
+		6A01E8A22CBE6C3500079E89 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
+		6A01E8AF2CBE6C4F00079E89 /* Embed Libraries */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				6A01E8AC2CBE6C4F00079E89 /* libobjc.A.dylib in Embed Libraries */,
+			);
+			name = "Embed Libraries";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		6EF877D52325D62600963DBB /* Install Manpages */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
@@ -207,6 +236,7 @@
 		39ABD71F12F0B61800D1054C /* objc-weak.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "objc-weak.h"; path = "runtime/objc-weak.h"; sourceTree = "<group>"; };
 		39ABD72012F0B61800D1054C /* objc-weak.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = "objc-weak.mm"; path = "runtime/objc-weak.mm"; sourceTree = "<group>"; };
 		4D88C663298C76E1009A8928 /* objc-malloc-instance.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "objc-malloc-instance.h"; path = "runtime/objc-malloc-instance.h"; sourceTree = "<group>"; };
+		6A01E8A42CBE6C3500079E89 /* MyDebug */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = MyDebug; sourceTree = BUILT_PRODUCTS_DIR; };
 		6E1475E521DFDB1A001357EA /* llvm-AlignOf.h */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 2; lastKnownFileType = sourcecode.c.h; name = "llvm-AlignOf.h"; path = "runtime/llvm-AlignOf.h"; sourceTree = "<group>"; tabWidth = 2; };
 		6E1475E621DFDB1B001357EA /* llvm-DenseMap.h */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 2; lastKnownFileType = sourcecode.c.h; name = "llvm-DenseMap.h"; path = "runtime/llvm-DenseMap.h"; sourceTree = "<group>"; tabWidth = 2; };
 		6E1475E721DFDB1B001357EA /* llvm-DenseMapInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 2; lastKnownFileType = sourcecode.c.h; name = "llvm-DenseMapInfo.h"; path = "runtime/llvm-DenseMapInfo.h"; sourceTree = "<group>"; tabWidth = 2; };
@@ -333,7 +363,19 @@
 		F9BCC727205C68E800DD9AFC /* libobjc-trampolines.dylib */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.dylib"; includeInIndex = 0; path = "libobjc-trampolines.dylib"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedRootGroup section */
+		6A01E8A52CBE6C3500079E89 /* MyDebug */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = MyDebug; sourceTree = "<group>"; };
+/* End PBXFileSystemSynchronizedRootGroup section */
+
 /* Begin PBXFrameworksBuildPhase section */
+		6A01E8A12CBE6C3500079E89 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6A01E8AB2CBE6C4F00079E89 /* libobjc.A.dylib in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		6EF877D42325D62600963DBB /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -372,6 +414,7 @@
 		08FB7794FE84155DC02AAC07 /* objc */ = {
 			isa = PBXGroup;
 			children = (
+				6A01E89F2CBE5CED00079E89 /* include */,
 				BC8B5D1212D3D48100C78A5B /* libauto.dylib */,
 				838485C60D6D687700CEA253 /* Public Headers */,
 				838485C70D6D688200CEA253 /* Private Headers */,
@@ -382,6 +425,7 @@
 				838485B20D6D67F900CEA253 /* Other */,
 				6EF877D82325D62600963DBB /* objcdt */,
 				E9AD465824925261002AF1DB /* check-preopt-caches */,
+				6A01E8A52CBE6C3500079E89 /* MyDebug */,
 				1AB674ADFE9D54B511CA2CBB /* Products */,
 				F9BCC72A205C6A1600DD9AFC /* Frameworks */,
 			);
@@ -445,8 +489,16 @@
 				F9BCC727205C68E800DD9AFC /* libobjc-trampolines.dylib */,
 				6EF877D72325D62600963DBB /* objcdt */,
 				D36DEAC4285B2C7D009B5CC4 /* libobjc-env.dylib */,
+				6A01E8A42CBE6C3500079E89 /* MyDebug */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		6A01E89F2CBE5CED00079E89 /* include */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = include;
 			sourceTree = "<group>";
 		};
 		6EF877D82325D62600963DBB /* objcdt */ = {
@@ -689,6 +741,30 @@
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
+		6A01E8A32CBE6C3500079E89 /* MyDebug */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 6A01E8A82CBE6C3500079E89 /* Build configuration list for PBXNativeTarget "MyDebug" */;
+			buildPhases = (
+				6A01E8A02CBE6C3500079E89 /* Sources */,
+				6A01E8A12CBE6C3500079E89 /* Frameworks */,
+				6A01E8A22CBE6C3500079E89 /* CopyFiles */,
+				6A01E8AF2CBE6C4F00079E89 /* Embed Libraries */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				6A01E8AE2CBE6C4F00079E89 /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				6A01E8A52CBE6C3500079E89 /* MyDebug */,
+			);
+			name = MyDebug;
+			packageProductDependencies = (
+			);
+			productName = MyDebug;
+			productReference = 6A01E8A42CBE6C3500079E89 /* MyDebug */;
+			productType = "com.apple.product-type.tool";
+		};
 		6EF877D62325D62600963DBB /* objcdt */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 6EF877DD2325D62600963DBB /* Build configuration list for PBXNativeTarget "objcdt" */;
@@ -771,6 +847,9 @@
 			attributes = {
 				LastUpgradeCheck = 0440;
 				TargetAttributes = {
+					6A01E8A32CBE6C3500079E89 = {
+						CreatedOnToolsVersion = 16.0;
+					};
 					6EF877D62325D62600963DBB = {
 						CreatedOnToolsVersion = 11.0;
 					};
@@ -812,6 +891,7 @@
 				834F9B01212E560100F95A54 /* objc4_tests */,
 				6EF877EF23263D7000963DBB /* objc_executables */,
 				6EF877D62325D62600963DBB /* objcdt */,
+				6A01E8A32CBE6C3500079E89 /* MyDebug */,
 			);
 		};
 /* End PBXProject section */
@@ -831,7 +911,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "set -x\nif [ $ACTION = \"installhdrs\" -o $ACTION = \"installapi\" ]; then exit; fi\n/usr/bin/xcrun -sdk macosx.internal clang++ -Wall -mmacosx-version-min=10.12 -arch x86_64 -std=c++11 \"${SRCROOT}/markgc.cpp\" -o \"${BUILT_PRODUCTS_DIR}/markgc\"\n\"${BUILT_PRODUCTS_DIR}/markgc\" \"${BUILT_PRODUCTS_DIR}/libobjc.A.dylib\" \"${CONFIGURATION}\" \"${ENABLE_ADDRESS_SANITIZER}\"\n";
+			shellScript = "set -x\nif [ $ACTION = \"installhdrs\" -o $ACTION = \"installapi\" ]; then exit; fi\n/usr/bin/xcrun -sdk macosx clang++ -Wall -mmacosx-version-min=10.12 -arch x86_64 -std=c++11 \"${SRCROOT}/markgc.cpp\" -o \"${BUILT_PRODUCTS_DIR}/markgc\"\n\"${BUILT_PRODUCTS_DIR}/markgc\" \"${BUILT_PRODUCTS_DIR}/libobjc.A.dylib\" \"${CONFIGURATION}\" \"${ENABLE_ADDRESS_SANITIZER}\"\n";
 		};
 		830F2AFA0D73BC5800392440 /* Run Script (symlink) */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -930,6 +1010,13 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		6A01E8A02CBE6C3500079E89 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		6EF877D32325D62600963DBB /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -1008,6 +1095,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		6A01E8AE2CBE6C4F00079E89 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = D2AAC0620554660B00DB518D /* objc */;
+			targetProxy = 6A01E8AD2CBE6C4F00079E89 /* PBXContainerItemProxy */;
+		};
 		6EF877F423263D8000963DBB /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 6EF877D62325D62600963DBB /* objcdt */;
@@ -1055,6 +1147,7 @@
 					"$(CONFIGURATION_BUILD_DIR)$(SYSTEM_PREFIX)/usr/include",
 					"$(CONFIGURATION_BUILD_DIR)$(SYSTEM_PREFIX)/usr/local/include",
 					/System/Library/Frameworks/System.framework/PrivateHeaders,
+					"\"$(SRCROOT)/include\"",
 				);
 				"INCLUDED_SOURCE_FILE_NAMES[sdk=macosx*][arch=i386]" = "dummy-library-mac-i386.c";
 				INSTALL_PATH = "$(SYSTEM_PREFIX)/usr/lib";
@@ -1095,7 +1188,6 @@
 				);
 				"OTHER_LDFLAGS[sdk=macosx*]" = (
 					"$(inherited)",
-					"-lCrashReporterClient",
 					"-lc++abi",
 					"-Xlinker",
 					"-sectalign",
@@ -1105,7 +1197,6 @@
 					__objc_data,
 					"-Xlinker",
 					0x1000,
-					"-loah",
 				);
 				"OTHER_LDFLAGS[sdk=macosx*][arch=i386]" = (
 					"$(inherited)",
@@ -1115,6 +1206,7 @@
 				PRIVATE_HEADERS_FOLDER_PATH = "$(SYSTEM_PREFIX)/usr/local/include/objc";
 				PRODUCT_NAME = objc.A;
 				PUBLIC_HEADERS_FOLDER_PATH = "$(SYSTEM_PREFIX)/usr/include/objc";
+				SDKROOT = macosx;
 				SUPPORTS_TEXT_BASED_API = YES;
 				SYSTEM_HEADER_SEARCH_PATHS = (
 					"$(DSTROOT)$(SYSTEM_PREFIX)/usr/local/include",
@@ -1148,6 +1240,7 @@
 					"$(CONFIGURATION_BUILD_DIR)$(SYSTEM_PREFIX)/usr/include",
 					"$(CONFIGURATION_BUILD_DIR)$(SYSTEM_PREFIX)/usr/local/include",
 					/System/Library/Frameworks/System.framework/PrivateHeaders,
+					"\"$(SRCROOT)/include\"",
 				);
 				"INCLUDED_SOURCE_FILE_NAMES[sdk=macosx*][arch=i386]" = "dummy-library-mac-i386.c";
 				INSTALL_PATH = "$(SYSTEM_PREFIX)/usr/lib";
@@ -1207,6 +1300,7 @@
 				PRIVATE_HEADERS_FOLDER_PATH = "$(SYSTEM_PREFIX)/usr/local/include/objc";
 				PRODUCT_NAME = objc.A;
 				PUBLIC_HEADERS_FOLDER_PATH = "$(SYSTEM_PREFIX)/usr/include/objc";
+				SDKROOT = macosx;
 				SUPPORTS_TEXT_BASED_API = YES;
 				SYSTEM_HEADER_SEARCH_PATHS = (
 					"$(DSTROOT)$(SYSTEM_PREFIX)/usr/local/include",
@@ -1321,6 +1415,114 @@
 					"-Wno-cast-of-sel-type",
 					"-Wformat-nonliteral",
 				);
+			};
+			name = Release;
+		};
+		6A01E8A92CBE6C3500079E89 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MACOSX_DEPLOYMENT_TARGET = 15.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		6A01E8AA2CBE6C3500079E89 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MACOSX_DEPLOYMENT_TARGET = 15.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
 			};
 			name = Release;
 		};
@@ -1467,6 +1669,7 @@
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
 			};
 			name = Debug;
@@ -1518,6 +1721,7 @@
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
 			};
 			name = Release;
@@ -1557,6 +1761,7 @@
 				PRIVATE_HEADERS_FOLDER_PATH = "$(TRAMPOLINES_PRIVATE_HEADERS_PATH)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PUBLIC_HEADERS_FOLDER_PATH = "$(SYSTEM_PREFIX)/usr/include/objc";
+				SDKROOT = macosx;
 				SKIP_INSTALL = "$(TRAMPOLINES_SKIP_INSTALL)";
 				SUPPORTS_TEXT_BASED_API = "$(TRAMPOLINES_TAPI_ENABLED)";
 				SYSTEM_HEADER_SEARCH_PATHS = (
@@ -1604,6 +1809,7 @@
 				PRIVATE_HEADERS_FOLDER_PATH = "$(TRAMPOLINES_PRIVATE_HEADERS_PATH)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PUBLIC_HEADERS_FOLDER_PATH = "$(SYSTEM_PREFIX)/usr/include/objc";
+				SDKROOT = macosx;
 				SKIP_INSTALL = "$(TRAMPOLINES_SKIP_INSTALL)";
 				SUPPORTS_TEXT_BASED_API = "$(TRAMPOLINES_TAPI_ENABLED)";
 				SYSTEM_HEADER_SEARCH_PATHS = (
@@ -1635,6 +1841,15 @@
 			buildConfigurations = (
 				1DEB914F08733D8E0010E9CD /* Debug */,
 				1DEB915008733D8E0010E9CD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		6A01E8A82CBE6C3500079E89 /* Build configuration list for PBXNativeTarget "MyDebug" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6A01E8A92CBE6C3500079E89 /* Debug */,
+				6A01E8AA2CBE6C3500079E89 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

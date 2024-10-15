@@ -479,14 +479,14 @@ map_images_nolock(unsigned mhCount, const struct _dyld_objc_notify_mapped_info i
         // Disable +initialize fork safety if the app has a
         //   __DATA,__objc_fork_ok section.
 
-        if (!dyld_program_sdk_at_least(dyld_platform_version_macOS_10_13)) {
-            DisableInitializeForkSafety = On;
-            if (PrintInitializing) {
-                _objc_inform("INITIALIZE: disabling +initialize fork "
-                             "safety enforcement because the app is "
-                             "too old.)");
-            }
-        }
+//        if (!dyld_program_sdk_at_least(dyld_platform_version_macOS_10_13)) {
+//            DisableInitializeForkSafety = On;
+//            if (PrintInitializing) {
+//                _objc_inform("INITIALIZE: disabling +initialize fork "
+//                             "safety enforcement because the app is "
+//                             "too old.)");
+//            }
+//        }
 
         for (uint32_t i = 0; i < hCount; i++) {
             auto hi = mappedInfos[i].hi;
