@@ -58,12 +58,6 @@
 
 4. 这里包含一个示例类 Person 以及一些示例代码，请在 `+ (void)load` 方法内打上断点，然后运行该项目。
 
-> 之所以在 main 中创建 Person 而不是单独创建 Person 文件，完全是无奈之举；因为如果创建了 Person 文件，就会导致 main.m 中的断点失效；
-> 
-> 或许你知道可以通过调整 main.m 文件的编译顺序在 Person 文件的前面，这样 main.m 文件确实能正常调试断点了，但 Person 文件中的断点又失效了。
-> 
-> 目前我并没有找到更好的解决方案，也不清楚导致这个问题的具体原因；如果你知道具体原因或有更好的解决方案，请联系我的邮箱告知：[internetwei@foxmail.com](mailto:internetwei@foxmail.com)
-
 5. 观察函数调用栈，如果能看到如下调用顺序(`不同版本的函数名称可能不一样`)，则OK，反之，请创建一个 [Issues](https://gitee.com/internetWei/ObjcRuntimes/issues/new)。
 ```objc
 0 +[Person load]
@@ -72,3 +66,15 @@
 3 load_images
 ```
 ![image3](Resources/image3.jpeg)
+
+## 可能出现的问题
+- 在新文件中设置断点时可能会不执行。
+    解决方案有2个：
+    1. 修改 MyDeug => Build Phases => Compile Sources 中的文件编译顺序，将新文件手动挪动到第1个。
+    2. 修改 MyDeug => Build Settings => Debug information Format 中关于 Debug 的配置，将 DWARF 改为 DWARF with dSYM File。
+    
+    改之前：
+    ![old](assets/iShot_2024-12-18_09.29.59.png)
+    
+    改之后：
+    ![new](assets/iShot_2024-12-18_09.30.18.png)
