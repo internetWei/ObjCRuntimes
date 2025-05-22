@@ -13,6 +13,7 @@
 | 13.0 ~ 13.5 | objc4-866.9 |
 | 12.3 ~< 13.0 | objc4-841.13 |
 | 15.0 | objc4-928.2 |
+| 15.4 ~ 15.5 | objc4-940.4 |
 
 > ~ 表示左右都包含。例如 13.0 ~ 13.5 表示 13.0 至 13.1 并且包括 13.0 和 13.1。
 > 
@@ -74,7 +75,7 @@
     2. 修改 MyDeug => Build Settings => Debug information Format 中关于 Debug 的配置，将 DWARF 改为 DWARF with dSYM File。
     
     改之前：
-    ![old](assets/iShot_2024-12-18_09.29.59.png)
+    ![old](Resources/image4.png)
     
     改之后：
-    ![new](assets/iShot_2024-12-18_09.30.18.png)
+    ![new](Resources/image5.png)
